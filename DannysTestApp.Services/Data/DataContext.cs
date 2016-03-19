@@ -65,7 +65,7 @@ namespace DannysTestApp.Services.Data
         #region SQL Async Stack
         public Task<int> InsertAsync(object row)
         {
-            return Task.Run(() => this.ExecuteWithLock(() => (this.Insert(row))));
+            return Task.Run(() => this.ExecuteWithLock(() => this.Insert(row)));
         }
         #endregion
 
@@ -76,6 +76,7 @@ namespace DannysTestApp.Services.Data
         }
         #endregion
 
+        #region Private Instance Methods
         private int ExecuteWithLock(Func<int> sqlFunction)
         {
             lock(this.Connection)
@@ -83,6 +84,7 @@ namespace DannysTestApp.Services.Data
                 return sqlFunction();
             }
         }
+        #endregion
     }
 
     internal class ConnectionPool
