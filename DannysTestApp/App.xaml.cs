@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DannysTestApp.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -76,7 +77,10 @@ namespace DannysTestApp
                 // configuring the new page by passing required information as a navigation
                 // parameter
                 Test.StartTesting();
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                Test.ObjectTesting();
+                Test.AnimalTesting();
+                               
+                rootFrame.Navigate(typeof(MainView), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();
