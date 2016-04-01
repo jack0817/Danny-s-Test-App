@@ -1,22 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DannysTestApp.Services;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace DannysTestApp.Views
 {
@@ -25,25 +10,28 @@ namespace DannysTestApp.Views
     /// </summary>
     public sealed partial class DannyView : Page
     {
+        private LogService LogService { get; set; }
+
         public DannyView()
         {
             this.InitializeComponent();
+            this.LogService = new LogService(typeof(DannyView));
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var authService = new AuthenticationService();
+            var token = await authService.GetTokenAsync();
+            if (token == null)
+                return;
+
+            if(token.Error != null)
             {
-                string url = "https://api.thetvdb.com/login";
-                string auth = "{\"apikey\": \"C25CC013BC89D0C2\",\"username\": \"jack0817\",\"userpass\": \"Ibanez17\"}";
-                HttpContent content = new StringContent(auth, Encoding.UTF8, "application/json");
-                HttpClient client = new HttpClient();
-                var response = await client.PostAsync(url, content);
+                this.LogService.Error(string.Format("Unable to retrieve authentication token, msg:{0}", token.Error));
+                return;
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+
+            Debug.Write(string.Format("TOKEN:{0}", token.Token));
         }
     }
 }

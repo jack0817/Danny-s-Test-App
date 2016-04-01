@@ -1,4 +1,5 @@
-﻿using DannysTestApp.Views;
+﻿using DannysTestApp.Services.Data;
+using DannysTestApp.Views;
 using System;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -28,8 +29,11 @@ namespace DannysTestApp
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
+            await DataContext.Shared.InitAsync("Data");
+            await DataContext.Shared.CreateModelAsync();
+
             var rootFrame = new Frame();
             //rootFrame.Navigate(typeof(LoginView), e.SplashScreen);
             rootFrame.Navigate(typeof(DannyView), e.SplashScreen);

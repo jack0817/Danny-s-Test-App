@@ -107,8 +107,17 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationService.cs" />
     <Compile Include="Data\DataContext.cs" />
+    <Compile Include="LogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\ApiToken.cs" />
+    <Compile Include="Security\Authentication.cs" />
+    <Compile Include="ServiceBase.cs" />
+    <Compile Include="Web\Contract\TVDBContract.cs" />
+    <Compile Include="Web\IWebService.cs" />
+    <Compile Include="Web\TVDBWebService.cs" />
+    <Compile Include="Web\WebServiceRequest.cs" />
     <EmbeddedResource Include="Properties\DannysTestApp.Services.rd.xml" />
   </ItemGroup>
   <ItemGroup>
