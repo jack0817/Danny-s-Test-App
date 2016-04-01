@@ -31,7 +31,8 @@ namespace DannysTestApp
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             var rootFrame = new Frame();
-            rootFrame.Navigate(typeof(LoginView), e.SplashScreen);
+            //rootFrame.Navigate(typeof(LoginView), e.SplashScreen);
+            rootFrame.Navigate(typeof(DannyView), e.SplashScreen);
             Window.Current.Content = rootFrame;
             Window.Current.Activate();
         }

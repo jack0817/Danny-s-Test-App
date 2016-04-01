@@ -1,31 +1,42 @@
 ﻿<Page
-    x:Class="DannysTestApp.MainPage1"
+    x:Class="DannysTestApp.Views.DannyView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DannysTestApp"
+    xmlns:local="using:DannysTestApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    RequestedTheme="Dark"
     mc:Ignorable="d">
-
     
-    <Grid Background="Gray">
-        <Grid VerticalAlignment="Top" Background="Black" Height="200">
-            <TextBlock Text="Danny's Test App" HorizontalAlignment="Left" VerticalAlignment="Center" Height="89.962" Margin="175.748,46.138,0,63.9" Width="564.2" Foreground="#FFD8CDCD" FontFamily="Showcard Gothic" FontSize="64" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-                <TextBlock.RenderTransform>
-                    <CompositeTransform SkewY="1.102" TranslateY="4.636" Rotation="-0.868"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
+    <Grid x:Name="RootName" Background="Gray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="90"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" Text="Danny's Test App" Style="{StaticResource HeaderTextBlockStyle}" VerticalAlignment="Center"/>
         </Grid>
-        <Grid VerticalAlignment="Bottom" Height="865">
-            <Grid HorizontalAlignment="Left" Width="300">
-                <StackPanel Width="300" VerticalAlignment="Top"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="10">
                 <TextBlock Text="Search"/>
                 <TextBox/>
-                
-
+                <DatePicker/>
+                <DatePicker/>
+                <ToggleSwitch/>
+                <Button Content="Login" Click="Button_Click"/>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                <Image Source="/Assets/TheDivision.jpg"/>
             </Grid>
         </Grid>
-
-
     </Grid>
 </Page>
