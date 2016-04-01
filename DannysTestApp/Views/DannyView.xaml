@@ -7,10 +7,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    
+    <Grid Background="Gray">
+        <Grid VerticalAlignment="Top" Background="Black" Height="200">
+            <TextBlock Text="Danny's Test App" HorizontalAlignment="Left" VerticalAlignment="Center" Height="89.962" Margin="175.748,46.138,0,63.9" Width="564.2" Foreground="#FFD8CDCD" FontFamily="Showcard Gothic" FontSize="64" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+                <TextBlock.RenderTransform>
+                    <CompositeTransform SkewY="1.102" TranslateY="4.636" Rotation="-0.868"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Grid>
+        <Grid VerticalAlignment="Bottom" Height="865">
+            <Grid HorizontalAlignment="Left" Width="300">
+                <StackPanel Width="300" VerticalAlignment="Top"/>
+                <TextBlock Text="Search"/>
+                <TextBox/>
+                
 
-    <Grid Background="#FF190101">
-        <Grid Grid.Row="2"
-              
+            </Grid>
+        </Grid>
+
 
     </Grid>
 </Page>
