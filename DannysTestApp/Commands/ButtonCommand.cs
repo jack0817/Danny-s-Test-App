@@ -12,15 +12,20 @@ namespace DannysTestApp.Commands
         public event EventHandler CanExecuteChanged;
 
         public Action ExecuteAction { get; set; }
+        public Func<bool> CanExecutionFunction { get; set; }
 
-        public ButtonCommand(Action executeAction)
+        public ButtonCommand(Action executeAction, Func<bool> canExecuteFunction = null)
         {
             this.ExecuteAction = executeAction;
+            this.CanExecutionFunction = canExecuteFunction;
         }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            if(this.CanExecutionFunction == null)
+                return true;
+
+            return this.CanExecutionFunction();
         }
 
         public void Execute(object parameter)
@@ -29,6 +34,14 @@ namespace DannysTestApp.Commands
                 return;
 
             this.ExecuteAction();
+        }
+
+        public void FireCanExecuteChanged()
+        {
+            if (this.CanExecuteChanged == null)
+                return;
+
+            this.CanExecuteChanged(this, EventArgs.Empty);
         }
     }
 }

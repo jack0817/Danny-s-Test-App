@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace DannysTestApp.Services.Web
@@ -12,10 +13,12 @@ namespace DannysTestApp.Services.Web
         private const string BASE_URL = "https://api-beta.thetvdb.com/";
 
         private LogService LogService { get; set; }
+        private AppSettingsService SettingsService { get; set; }
 
         public TVDBWebService()
         {
             this.LogService = new LogService(typeof(TVDBWebService));
+            this.SettingsService = new AppSettingsService();
         }
 
         public WebServiceRequest CreateBaseRequest()
@@ -29,7 +32,7 @@ namespace DannysTestApp.Services.Web
             if (string.IsNullOrEmpty(url))
                 return default(T);
 
-            using (var client = new HttpClient())
+            using (var client = this.CreateClient())
             {
                 var response = await this.TryGetResponse(() => client.GetAsync(url));
                 if (response == null || response.StatusCode != HttpStatusCode.OK)
@@ -47,7 +50,7 @@ namespace DannysTestApp.Services.Web
             if (string.IsNullOrEmpty(url) || content == null)
                 return default(T);
 
-            using (var client = new HttpClient())
+            using (var client = this.CreateClient())
             {
                 var response = await this.TryGetResponse(() => client.PostAsync(url, content));
                 if (response == null)
@@ -70,6 +73,14 @@ namespace DannysTestApp.Services.Web
             }
 
             return null;
+        }
+
+        private HttpClient CreateClient()
+        {
+            var client = new HttpClient();
+            var apiToken = this.SettingsService.GetValue(AppSettingsService.Keys.API_KEY);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiToken);
+            return client;
         }
     }
 }

@@ -36,7 +36,8 @@ namespace DannysTestApp
 
             var rootFrame = new Frame();
             //rootFrame.Navigate(typeof(LoginView), e.SplashScreen);
-            rootFrame.Navigate(typeof(DannyView), e.SplashScreen);
+            // rootFrame.Navigate(typeof(DannyView), e.SplashScreen);
+            rootFrame.Navigate(typeof(SearchView), e.SplashScreen);
             Window.Current.Content = rootFrame;
             Window.Current.Activate();
         }

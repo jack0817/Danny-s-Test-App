@@ -1,4 +1,5 @@
-﻿using DannysTestApp.Services.Security;
+﻿using DannysTestApp.Model;
+using DannysTestApp.Services.Security;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -54,11 +55,11 @@ namespace DannysTestApp.Services.Web.Contract
         }
         #endregion
 
-        private void BuildContract(Type contactType)
+        private void BuildContract(Type contractType)
         {
             this.Mapping.Clear();
 
-            if(contactType == typeof(Authentication))
+            if(contractType == typeof(Authentication))
             {
                 this.Mapping.Add("ApiKey", "apikey");
                 this.Mapping.Add("UserName", "username");
@@ -66,9 +67,28 @@ namespace DannysTestApp.Services.Web.Contract
                 return;
             }
 
-            if(contactType == typeof(ApiToken))
+            if(contractType == typeof(ApiToken))
             {
                 this.Mapping.Add("Token", "token");
+                return;
+            }
+
+            if (contractType == typeof(SearchResults))
+            {
+                this.Mapping.Add("Data", "data");
+                return;
+            }
+
+            if (contractType == typeof(Series))
+            {   
+                this.Mapping.Add("SeriesId", "id");
+                this.Mapping.Add("SeriesName", "seriesName");
+                this.Mapping.Add("Banner", "banner");
+                this.Mapping.Add("FirstAired", "firstAired");
+                this.Mapping.Add("Network", "network");
+                this.Mapping.Add("Overview", "overview");
+                this.Mapping.Add("Status", "status");
+                this.Mapping.Add("Aliases", "aliases");
                 return;
             }
         }

@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DannysTestApp.Assets">
+
+    <Color x:Key="AppTintColor">#FF0066CC</Color>
+    <Color x:Key="AppBackgroundDarkColor">#FF282828</Color>
+    <Color x:Key="AppBackgroundMediumColor">#FF646464</Color>
+    <Color x:Key="AppBackgroundLightColor">#FF969696</Color>
+
+    <SolidColorBrush x:Key="AppTintColorBrush" Color="{StaticResource AppTintColor}"/>
+    <SolidColorBrush x:Key="AppBackgroundDarkColorBrush" Color="{StaticResource AppBackgroundDarkColor}"/>
+    <SolidColorBrush x:Key="AppBackgroundMediumColorBrush" Color="{StaticResource AppBackgroundMediumColor}"/>
+    <SolidColorBrush x:Key="AppBackgroundLightColorBrush" Color="{StaticResource AppBackgroundLightColor}"/>
+
+</ResourceDictionary>
