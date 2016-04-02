@@ -13,6 +13,7 @@ namespace DannysTestApp.ViewModels
         private string _searchText;
         private string _outputText;
         private ButtonCommand _searchCommand;
+        private bool _isSearching;
 
         public string SearchText
         {
@@ -45,6 +46,16 @@ namespace DannysTestApp.ViewModels
             }
         }
 
+        public bool IsSearching
+        {
+            get { return this._isSearching; }
+            set
+            {
+                this._isSearching = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
         private SearchService SearchService { get; set; }
 
         public SearchViewModel()
@@ -65,8 +76,12 @@ namespace DannysTestApp.ViewModels
 
         private async void PerformSearch()
         {
+            this.IsSearching = true;
+
             var results = await this.SearchService.SearchSeriesAsync(this.SearchText);
             this.OutputText = results == null || results.Count == 0 ? "No results found" : string.Format("{0} result(s) found", results.Count);
+
+            this.IsSearching = false;
         }
     }
 }
