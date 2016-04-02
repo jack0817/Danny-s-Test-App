@@ -7,9 +7,9 @@ namespace DannysTestApp.Services
 {
     public class AuthenticationService : ServiceBase
     {
-        private const string API_KEY = "C25CC013BC89D0C2";
-        private const string USER_ID = "jack0817";
-        private const string USER_PASS = "Ibanez17";
+        private const string API_KEY = "3F2CB03ED0901F9E";
+        private const string USER_ID = "DannyTestApp";
+        private const string USER_PASS = "BlargZarg123!";
 
         public async Task<ApiToken> GetTokenAsync()
         {
