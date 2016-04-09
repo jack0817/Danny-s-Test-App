@@ -99,7 +99,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\ButtonCommand.cs" />
+    <Compile Include="Constants\DesignConstants.cs" />
+    <Compile Include="Converters\TitleFromSearchResultConverter.cs" />
     <Compile Include="Converters\VisibilityFromBoolConverter.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

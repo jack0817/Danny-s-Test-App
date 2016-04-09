@@ -1,4 +1,6 @@
 ﻿using DannysTestApp.Commands;
+using DannysTestApp.Constants;
+using DannysTestApp.Extensions;
 using DannysTestApp.Model;
 using DannysTestApp.Services;
 using System;
@@ -18,7 +20,7 @@ namespace DannysTestApp.ViewModels
         private ButtonCommand _searchCommand;
         private bool _isSearching;
         private ObservableCollection<Series> _series = new ObservableCollection<Series>();
-
+        private ObservableCollection<SearchResult> _searchResults = new ObservableCollection<SearchResult>();
         
         public string SearchText
         {
@@ -66,6 +68,11 @@ namespace DannysTestApp.ViewModels
             get { return this._series; }              
         }
 
+        public ObservableCollection<SearchResult> SearchResults
+        {
+            get { return this._searchResults; }
+        }
+
         private SearchService SearchService { get; set; }
 
         /// <summary>
@@ -82,23 +89,23 @@ namespace DannysTestApp.ViewModels
         {
             if (!DesignMode.DesignModeEnabled)
                 return;
-            var series1 = new Series
-            {
-                SeriesName = "Marky",
-                Network = "NBC",
-                Overview = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 
+            var serachResult1 = new SearchResult
+            {
+                Title = "Design Result 001",
+                OriginalTitle = "Design Result 001",
+                Overview = DesignConstants.LOREM_IPSUM,
             };
 
-            var series2 = new Series
+            var serachResult2 = new SearchResult
             {
-                SeriesName = "Danny",
-                Network = "Fox",
-                Overview = "I am the one who knocks!",
-
+                Title = "Design Result 002",
+                OriginalTitle = "Design Result 002",
+                Overview = DesignConstants.LOREM_IPSUM,
             };
-            this.Series.Add(series1);
-            this.Series.Add(series2);
+
+            this.SearchResults.Add(serachResult1);
+            this.SearchResults.Add(serachResult2);
         }
 
         private void InitCommands()
@@ -115,8 +122,12 @@ namespace DannysTestApp.ViewModels
         {
             this.IsSearching = true;
 
-            var results = await this.SearchService.SearchSeriesAsync(this.SearchText);
-            this.OutputText = results == null || results.Count == 0 ? "No results found" : string.Format("{0} result(s) found", results.Count);
+            this.SearchResults.Clear();
+            var resultsPage = await this.SearchService.SearchMultiAsync(this.SearchText);
+            if(resultsPage != null)
+            {
+                this.SearchResults.AddRange(resultsPage.Results);  
+            }
 
             this.IsSearching = false;
         }

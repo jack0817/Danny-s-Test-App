@@ -116,8 +116,10 @@
     <Compile Include="Security\ApiToken.cs" />
     <Compile Include="Security\Authentication.cs" />
     <Compile Include="ServiceBase.cs" />
+    <Compile Include="Web\Contract\TheMovieDbContract.cs" />
     <Compile Include="Web\Contract\TVDBContract.cs" />
     <Compile Include="Web\IWebService.cs" />
+    <Compile Include="Web\TheMovieDbService.cs" />
     <Compile Include="Web\TVDBWebService.cs" />
     <Compile Include="Web\WebServiceRequest.cs" />
     <EmbeddedResource Include="Properties\DannysTestApp.Services.rd.xml" />

@@ -14,7 +14,6 @@ namespace DannysTestApp.Services
             public const string API_KEY = "AppApiKey";
         }
 
-
         private ApplicationDataContainer Settings
         {
             get { return ApplicationData.Current.LocalSettings; }

@@ -1,4 +1,5 @@
-﻿using DannysTestApp.Services.Web.Contract;
+﻿using DannysTestApp.Services.Security;
+using DannysTestApp.Services.Web.Contract;
 using Newtonsoft.Json;
 using System;
 using System.Net;
@@ -11,6 +12,9 @@ namespace DannysTestApp.Services.Web
     public class TVDBWebService : IWebService
     {
         private const string BASE_URL = "https://api-beta.thetvdb.com/";
+        private const string API_KEY = "3F2CB03ED0901F9E";
+        private const string USER_ID = "DannyTestApp";
+        private const string USER_PASS = "BlargZarg123!";
 
         private LogService LogService { get; set; }
         private AppSettingsService SettingsService { get; set; }
@@ -19,6 +23,22 @@ namespace DannysTestApp.Services.Web
         {
             this.LogService = new LogService(typeof(TVDBWebService));
             this.SettingsService = new AppSettingsService();
+        }
+
+        public WebServiceRequest CreateAuthorizationRequest()
+        {
+            var auth = new Authentication
+            {
+                ApiKey = TVDBWebService.API_KEY,
+                UserName = TVDBWebService.USER_ID,
+                UserPass = TVDBWebService.USER_PASS
+            };
+
+            var authJson = TVDBContract.Serialize(auth);
+            var request = this.CreateBaseRequest();
+            request.SetPath("login");
+            request.SetContent(authJson);
+            return request;
         }
 
         public WebServiceRequest CreateBaseRequest()

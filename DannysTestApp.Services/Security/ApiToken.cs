@@ -10,5 +10,7 @@ namespace DannysTestApp.Services.Security
     {
         public string Token { get; set; }
         public string Error { get; set; }
+        public bool Success { get; set; }
+        public DateTime ExpireDate { get; set; }
     }
 }

@@ -13,7 +13,8 @@ namespace DannysTestApp.Services
             {
                 if(this._webService == null)
                 {
-                    this._webService = new TVDBWebService();
+                    //this._webService = new TVDBWebService();
+                    this._webService = new TheMovieDbService();
                 }
 
                 return this._webService;

@@ -47,8 +47,7 @@ namespace DannysTestApp.Views
             this.IsEnabled = false;
 
             var authService = new AuthenticationService();
-            //var token = await authService.GetTokenAsync();
-            var token = await authService.RefreshToken();
+            var token = await authService.GetTokenAsync();
             if(token != null)
             {
                 settingsService.SetValue(AppSettingsService.Keys.API_KEY, token.Token);

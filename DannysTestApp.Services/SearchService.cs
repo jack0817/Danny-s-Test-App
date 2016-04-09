@@ -1,5 +1,6 @@
 ﻿using DannysTestApp.Model;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DannysTestApp.Services
@@ -41,6 +42,22 @@ namespace DannysTestApp.Services
             };
 
             return new List<Series> { series1, series2 };
+        }
+
+        public async Task<SearchResultPage> SearchMultiAsync(string query)
+        {
+            var urlQuery = this.GetCgiEscapedString(query);
+            var request = this.WebService.CreateBaseRequest();
+            request.SetPath("search/multi");
+            request.AddParameter("query", urlQuery);
+            return await this.WebService.GetAsync<SearchResultPage>(request);
+        }
+
+        private string GetCgiEscapedString(string originalString)
+        {
+            var escapedString = new StringBuilder(originalString);
+            escapedString.Replace(" ", "%20");
+            return escapedString.ToString();
         }
     }
 }

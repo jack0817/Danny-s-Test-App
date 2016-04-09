@@ -9,6 +9,7 @@ namespace DannysTestApp.Services.Web
     public interface IWebService
     {
         WebServiceRequest CreateBaseRequest();
+        WebServiceRequest CreateAuthorizationRequest();
         Task<T> GetAsync<T>(WebServiceRequest request);
         Task<T> PostAsync<T>(WebServiceRequest request);
     }
