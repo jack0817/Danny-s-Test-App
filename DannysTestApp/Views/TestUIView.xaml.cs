@@ -25,6 +25,7 @@ namespace DannysTestApp.Views
         public TestUIView()
         {
             this.InitializeComponent();
+            var myGrid = new Grid();
         }
     }
 }
