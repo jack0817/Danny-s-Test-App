@@ -44,11 +44,25 @@ namespace DannysTestApp.Services
             return new List<Series> { series1, series2 };
         }
 
-        public async Task<SearchResultPage> SearchMultiAsync(string query)
+        public async Task<SearchResultPage> SearchMultiAsync(string query, string searchType)
         {
             var urlQuery = this.GetCgiEscapedString(query);
             var request = this.WebService.CreateBaseRequest();
-            request.SetPath("search/multi");
+            switch(searchType)
+            {
+                case "All":
+                    request.SetPath("search/multi");
+                    break;
+                case "TV":
+                    request.SetPath("search/tv");
+                    break;
+                case "Movies":
+                    request.SetPath("search/movie");
+                    break;
+                case "People":
+                    request.SetPath("search/person");
+                    break;
+            }
             request.AddParameter("query", urlQuery);
             return await this.WebService.GetAsync<SearchResultPage>(request);
         }

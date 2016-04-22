@@ -156,7 +156,7 @@ namespace DannysTestApp.ViewModels
             this.IsSearching = true;
 
             this.SearchResults.Clear();
-            var resultsPage = await this.SearchService.SearchMultiAsync(this.SearchText);
+            var resultsPage = await this.SearchService.SearchMultiAsync(this.SearchText, this.SelectedSearchType);
             if(resultsPage != null)
             {
                 this.SearchResults.AddRange(resultsPage.Results);  
