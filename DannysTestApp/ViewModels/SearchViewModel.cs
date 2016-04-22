@@ -21,6 +21,10 @@ namespace DannysTestApp.ViewModels
         private bool _isSearching;
         private ObservableCollection<Series> _series = new ObservableCollection<Series>();
         private ObservableCollection<SearchResult> _searchResults = new ObservableCollection<SearchResult>();
+        private ObservableCollection<string> _searchTypes = new ObservableCollection<string>();
+        private string _selectedSearchType;
+
+
         
         public string SearchText
         {
@@ -73,6 +77,24 @@ namespace DannysTestApp.ViewModels
             get { return this._searchResults; }
         }
 
+        public ObservableCollection<string> SearchTypes
+        {
+            get { return this._searchTypes; }
+        }
+
+        public string SelectedSearchType
+        {
+            get { return this._selectedSearchType; }
+            set
+            {
+                this._selectedSearchType = value;
+                this.NotifyPropertyChanged();
+
+            }
+        }
+
+
+
         private SearchService SearchService { get; set; }
 
         /// <summary>
@@ -83,6 +105,17 @@ namespace DannysTestApp.ViewModels
             this.InitCommands();
             this.SearchService = new SearchService();
             this.CreateDesignData();
+            this.LoadSearchTypes();
+            this.SetDefaults();
+        }
+
+        private void LoadSearchTypes()
+        {
+            this.SearchTypes.Add("All");
+            this.SearchTypes.Add("TV");
+            this.SearchTypes.Add("People");
+            this.SearchTypes.Add("Movies");
+            
         }
 
         private void CreateDesignData()
@@ -130,6 +163,11 @@ namespace DannysTestApp.ViewModels
             }
 
             this.IsSearching = false;
+        }
+        private void SetDefaults()
+        {
+            this.SelectedSearchType = this.SearchTypes.ElementAt(0);
+
         }
     }
 }

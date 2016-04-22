@@ -39,6 +39,7 @@
                 <StackPanel Margin="10">
                     <TextBlock Text="Search" Style="{StaticResource HeaderTextBlockStyle}"/>
                     <TextBox TextChanged="TextBox_TextChanged" PlaceholderText="Series Name" Margin="0,10,0,0"/>
+                    <ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding SearchTypes}" SelectedItem="{Binding SelectedSearchType, Mode=TwoWay}" ></ComboBox>
                     <Button Content="Search" HorizontalAlignment="Stretch" Command="{Binding SearchCommand}" IsEnabled="{Binding CanSearch}" Margin="0,10,0,0"/>
                 </StackPanel>
             </Grid>
