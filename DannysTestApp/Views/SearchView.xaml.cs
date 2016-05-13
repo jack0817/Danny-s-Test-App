@@ -1,4 +1,5 @@
-﻿using DannysTestApp.Services;
+﻿using DannysTestApp.Model;
+using DannysTestApp.Services;
 using DannysTestApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,48 @@ using Windows.UI.Xaml.Navigation;
 
 namespace DannysTestApp.Views
 {
+    public class SearchViewTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate TVTemplate { get; set; }
+        public DataTemplate MovieTemplate { get; set; }
+        public DataTemplate PersonTemplate { get; set; }
+        public SearchView ParentView { get; set; }
+
+        protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
+        {
+            var searchResult = item as SearchResult;
+            if (searchResult == null)
+            {
+                return null;
+            }
+            else
+            {
+                switch (searchResult.MediaType)
+                {
+                    case "tv":
+                        return this.TVTemplate;
+                    case "movie":
+                        return this.MovieTemplate;
+                    case "person":
+                        return this.PersonTemplate;
+                    default:
+                        {
+                            switch (this.ParentView.UserSearchType)
+                            {
+                                case "TV":
+                                    return this.TVTemplate;
+                                case "Movies":
+                                    return this.MovieTemplate;
+                                case "People":
+                                    return this.PersonTemplate;
+                                default:
+                                    return null;
+                            }
+                        }                    
+                }
+            }
+        }
+    }
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -31,12 +74,16 @@ namespace DannysTestApp.Views
             get { return this._viewModel; }
         }
 
+        public string UserSearchType { get; set; }
+
         public SearchView()
         {
             this.InitializeComponent();
             this.DataContext = this.ViewModel;
+            this.ViewModel.ParentView = this;
+            this.searchViewTemplateSelector.ParentView = this;
         }
-
+            
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             var settingsService = new AppSettingsService();

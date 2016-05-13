@@ -14,7 +14,8 @@
     <Page.Resources>
         <converteres:VisibilityFromBoolConverter x:Key="VisibilityFromBoolConverter"/>
         <converteres:TitleFromSearchResultConverter x:Key="TitleFromSearchResultConverter"/>
-        <DataTemplate x:Key="ResultDataTemplate">
+        
+        <!--<DataTemplate x:Key="ResultDataTemplate">
             <Grid Width="320" Height="200" Background="{StaticResource AppBackgroundMediumColorBrush}" Margin="0,0,10,10">
                 <Grid VerticalAlignment="Bottom" Background="{StaticResource AppTransparentDarkHeavyColorBrush}">
                     <StackPanel Margin="10">
@@ -26,7 +27,26 @@
                     </StackPanel>
                 </Grid>
             </Grid>
+        </DataTemplate>-->
+        <DataTemplate x:Key="MovieTemplate">
+            <Grid Width="320" Height="200">
+                <TextBlock Text="Movie"/>
+            </Grid>                
         </DataTemplate>
+        <DataTemplate x:Key="TVTemplate">
+            <Grid Width="320" Height="200">
+                <TextBlock Text="TV"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="PersonTemplate">
+            <Grid Width="320" Height="200">
+                <TextBlock Text="Person"/>
+            </Grid>
+        </DataTemplate>
+        <local:SearchViewTemplateSelector x:Key="SearchViewTemplateSelector" x:Name="searchViewTemplateSelector" 
+                                          MovieTemplate="{StaticResource  MovieTemplate}"
+                                          TVTemplate="{StaticResource TVTemplate}"
+                                          PersonTemplate="{StaticResource PersonTemplate}"/>
     </Page.Resources>
 
     <Grid Background="{StaticResource AppBackgroundDarkColorBrush}">
@@ -44,7 +64,7 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1">
-                <GridView ItemTemplate="{StaticResource ResultDataTemplate}" 
+                <GridView ItemTemplateSelector="{StaticResource SearchViewTemplateSelector}" 
                           ItemsSource="{Binding SearchResults}"/>
             </Grid>
         </Grid>

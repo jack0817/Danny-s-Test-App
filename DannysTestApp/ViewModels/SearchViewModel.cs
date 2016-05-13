@@ -3,6 +3,7 @@ using DannysTestApp.Constants;
 using DannysTestApp.Extensions;
 using DannysTestApp.Model;
 using DannysTestApp.Services;
+using DannysTestApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -92,10 +93,11 @@ namespace DannysTestApp.ViewModels
 
             }
         }
-
-
+        
+        public SearchView ParentView { get; set; }
 
         private SearchService SearchService { get; set; }
+
 
         /// <summary>
         /// Constructor!!! (CTOR for short)
@@ -153,6 +155,8 @@ namespace DannysTestApp.ViewModels
 
         private async void PerformSearch()
         {
+            this.ParentView.UserSearchType = this.SelectedSearchType;
+
             this.IsSearching = true;
 
             this.SearchResults.Clear();
