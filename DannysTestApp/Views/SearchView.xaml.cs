@@ -29,14 +29,14 @@ namespace DannysTestApp.Views
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            var searchResult = item as SearchResult;
+            var searchResult = item as SearchResultViewModel;
             if (searchResult == null)
             {
                 return null;
             }
             else
             {
-                var mediaType = searchResult.MediaType ?? this.ParentView.UserSearchType.ApiMediaType;
+                var mediaType = searchResult.Model.MediaType ?? this.ParentView.UserSearchType.ApiMediaType;
                 switch (mediaType)
                 {
                     case "tv":

@@ -23,7 +23,8 @@ namespace DannysTestApp.Model
         public double VoteAverage { get; set; }
         public int VoteCount { get; set; }
         public string MediaType { get; set; }
-
+        public string Name { get; set; }
+        
         [Ignore]
         public List<int> Genres { get; set; }
 

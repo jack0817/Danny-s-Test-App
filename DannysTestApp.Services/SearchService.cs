@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace DannysTestApp.Services
 {
@@ -57,6 +60,17 @@ namespace DannysTestApp.Services
             var escapedString = new StringBuilder(originalString);
             escapedString.Replace(" ", "%20");
             return escapedString.ToString();
+        }
+
+        public Task<ImageSource> Getimage(string imagePath)
+        {
+            return Task.Run(() =>
+            {
+                var baseUrl = "https://image.tmdb.org/t/p/w185";
+                var fullUrl = string.Format("{0}{1}", baseUrl, imagePath);
+                return new BitmapImage(new Uri(fullUrl)) as ImageSource;
+            });
+            
         }
     }
 }

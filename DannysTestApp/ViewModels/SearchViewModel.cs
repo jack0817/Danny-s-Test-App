@@ -29,7 +29,7 @@ namespace DannysTestApp.ViewModels
         private ButtonCommand _searchCommand;
         private bool _isSearching;
         private ObservableCollection<Series> _series = new ObservableCollection<Series>();
-        private ObservableCollection<SearchResult> _searchResults = new ObservableCollection<SearchResult>();
+        private ObservableCollection<SearchResultViewModel> _searchResults = new ObservableCollection<SearchResultViewModel>();
         private ObservableCollection<SearchType> _searchTypes = new ObservableCollection<SearchType>();
         private SearchType _selectedSearchType;
 
@@ -81,7 +81,7 @@ namespace DannysTestApp.ViewModels
             get { return this._series; }              
         }
 
-        public ObservableCollection<SearchResult> SearchResults
+        public ObservableCollection<SearchResultViewModel> SearchResults
         {
             get { return this._searchResults; }
         }
@@ -132,22 +132,26 @@ namespace DannysTestApp.ViewModels
             if (!DesignMode.DesignModeEnabled)
                 return;
 
-            var serachResult1 = new SearchResult
+            var searchResult1 = new SearchResult
             {
                 Title = "Design Result 001",
                 OriginalTitle = "Design Result 001",
                 Overview = DesignConstants.LOREM_IPSUM,
+                MediaType = "tv"
             };
 
-            var serachResult2 = new SearchResult
+            var searchResult2 = new SearchResult
             {
                 Title = "Design Result 002",
                 OriginalTitle = "Design Result 002",
                 Overview = DesignConstants.LOREM_IPSUM,
+                MediaType = "tv"
             };
+            var vm1 = new SearchResultViewModel(searchResult1);
+            var vm2 = new SearchResultViewModel(searchResult2);
 
-            this.SearchResults.Add(serachResult1);
-            this.SearchResults.Add(serachResult2);
+            this.SearchResults.Add(vm1);
+            this.SearchResults.Add(vm2);
         }
 
         private void InitCommands()
@@ -170,7 +174,9 @@ namespace DannysTestApp.ViewModels
             var resultsPage = await this.SearchService.SearchMultiAsync(this.SearchText, this.SelectedSearchType.ApiUrlPath);
             if(resultsPage != null)
             {
-                this.SearchResults.AddRange(resultsPage.Results);  
+                var vms = resultsPage.Results.Select( r => new SearchResultViewModel(r) );
+                this.SearchResults.AddRange(vms);
+                this.Loadimages(); 
             }
 
             this.IsSearching = false;
@@ -178,6 +184,17 @@ namespace DannysTestApp.ViewModels
         private void SetDefaults()
         {
             this.SelectedSearchType = this.SearchTypes.ElementAt(0);
+        }
+
+        private async void Loadimages()
+        {
+            foreach (var vm in this.SearchResults)
+            {
+                if (vm.Image != null)
+                    continue;
+
+                vm.Image = await this.SearchService.Getimage(vm.Model.BackdropPath);
+            }
         }
     }
 }

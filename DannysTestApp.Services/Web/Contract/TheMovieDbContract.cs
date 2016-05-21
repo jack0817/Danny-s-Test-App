@@ -100,6 +100,7 @@ namespace DannysTestApp.Services.Web.Contract
                 this.Mapping.Add("VoteCount", "vote_count");
                 this.Mapping.Add("MediaType", "media_type");
                 this.Mapping.Add("Genres", "genre_ids");
+                this.Mapping.Add("Name", "name");
                 return;
             }
         }

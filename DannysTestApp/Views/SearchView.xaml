@@ -20,8 +20,12 @@
             </Grid>                
         </DataTemplate>
         <DataTemplate x:Key="TVTemplate">
-            <Grid Width="320" Height="200">
-                <TextBlock Text="TV"/>
+            <Grid Width="320" Height="200" Background="White">
+                <Grid VerticalAlignment="Bottom" Background="#AA000000">
+                <StackPanel Margin="10">
+                        <TextBlock Text="{Binding Model.Name}"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="PersonTemplate">
