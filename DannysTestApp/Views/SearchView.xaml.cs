@@ -36,7 +36,8 @@ namespace DannysTestApp.Views
             }
             else
             {
-                switch (searchResult.MediaType)
+                var mediaType = searchResult.MediaType ?? this.ParentView.UserSearchType.ApiMediaType;
+                switch (mediaType)
                 {
                     case "tv":
                         return this.TVTemplate;
@@ -45,19 +46,7 @@ namespace DannysTestApp.Views
                     case "person":
                         return this.PersonTemplate;
                     default:
-                        {
-                            switch (this.ParentView.UserSearchType)
-                            {
-                                case "TV":
-                                    return this.TVTemplate;
-                                case "Movies":
-                                    return this.MovieTemplate;
-                                case "People":
-                                    return this.PersonTemplate;
-                                default:
-                                    return null;
-                            }
-                        }                    
+                        return null;                 
                 }
             }
         }
@@ -74,7 +63,7 @@ namespace DannysTestApp.Views
             get { return this._viewModel; }
         }
 
-        public string UserSearchType { get; set; }
+        public SearchType UserSearchType { get; set; }
 
         public SearchView()
         {

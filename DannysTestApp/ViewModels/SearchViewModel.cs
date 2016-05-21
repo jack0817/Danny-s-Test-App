@@ -14,6 +14,14 @@ using Windows.ApplicationModel;
 
 namespace DannysTestApp.ViewModels
 {
+    public class SearchType
+    {
+        public SearchMediaType MediaType { get; set; }
+        public string DisplayName { get; set; }
+        public string ApiMediaType { get; set; }
+        public string ApiUrlPath { get; set; }
+    }
+
     public class SearchViewModel : ViewModelBase
     {
         private string _searchText;
@@ -22,8 +30,8 @@ namespace DannysTestApp.ViewModels
         private bool _isSearching;
         private ObservableCollection<Series> _series = new ObservableCollection<Series>();
         private ObservableCollection<SearchResult> _searchResults = new ObservableCollection<SearchResult>();
-        private ObservableCollection<string> _searchTypes = new ObservableCollection<string>();
-        private string _selectedSearchType;
+        private ObservableCollection<SearchType> _searchTypes = new ObservableCollection<SearchType>();
+        private SearchType _selectedSearchType;
 
 
         
@@ -78,12 +86,12 @@ namespace DannysTestApp.ViewModels
             get { return this._searchResults; }
         }
 
-        public ObservableCollection<string> SearchTypes
+        public ObservableCollection<SearchType> SearchTypes
         {
             get { return this._searchTypes; }
         }
 
-        public string SelectedSearchType
+        public SearchType SelectedSearchType
         {
             get { return this._selectedSearchType; }
             set
@@ -113,11 +121,10 @@ namespace DannysTestApp.ViewModels
 
         private void LoadSearchTypes()
         {
-            this.SearchTypes.Add("All");
-            this.SearchTypes.Add("TV");
-            this.SearchTypes.Add("People");
-            this.SearchTypes.Add("Movies");
-            
+            this.SearchTypes.Add(new SearchType { MediaType = SearchMediaType.All, DisplayName = "All", ApiMediaType = null, ApiUrlPath = "search/multi" });
+            this.SearchTypes.Add(new SearchType { MediaType = SearchMediaType.Movies, DisplayName = "Movies", ApiMediaType = "movie", ApiUrlPath = "search/movie" });
+            this.SearchTypes.Add(new SearchType { MediaType = SearchMediaType.TV, DisplayName = "TV", ApiMediaType = "tv", ApiUrlPath = "search/tv" });
+            this.SearchTypes.Add(new SearchType { MediaType = SearchMediaType.Person, DisplayName = "Person", ApiMediaType = "person", ApiUrlPath = "search/person" });
         }
 
         private void CreateDesignData()
@@ -160,7 +167,7 @@ namespace DannysTestApp.ViewModels
             this.IsSearching = true;
 
             this.SearchResults.Clear();
-            var resultsPage = await this.SearchService.SearchMultiAsync(this.SearchText, this.SelectedSearchType);
+            var resultsPage = await this.SearchService.SearchMultiAsync(this.SearchText, this.SelectedSearchType.ApiUrlPath);
             if(resultsPage != null)
             {
                 this.SearchResults.AddRange(resultsPage.Results);  
@@ -171,7 +178,6 @@ namespace DannysTestApp.ViewModels
         private void SetDefaults()
         {
             this.SelectedSearchType = this.SearchTypes.ElementAt(0);
-
         }
     }
 }

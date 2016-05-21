@@ -5,6 +5,14 @@ using System.Threading.Tasks;
 
 namespace DannysTestApp.Services
 {
+    public enum SearchMediaType
+    {
+        All,
+        Movies,
+        TV,
+        Person,
+    }
+
     internal class SearchResults
     {
         public List<Series> Data { get; set; }
@@ -14,15 +22,6 @@ namespace DannysTestApp.Services
     {
         public async Task<List<Series>> SearchSeriesAsync(string query)
         {
-            //var request = this.WebService.CreateBaseRequest();
-            //request.SetPath("search/series");
-            //request.AddParameter("name", query);
-
-            //var results = await this.WebService.GetAsync<SearchResults>(request);
-            //if (results == null)
-            //    return null;
-
-            //return results.Data;
             await Task.Yield();
 
             var series1 = new Series
@@ -44,25 +43,11 @@ namespace DannysTestApp.Services
             return new List<Series> { series1, series2 };
         }
 
-        public async Task<SearchResultPage> SearchMultiAsync(string query, string searchType)
+        public async Task<SearchResultPage> SearchMultiAsync(string query, string path)
         {
             var urlQuery = this.GetCgiEscapedString(query);
             var request = this.WebService.CreateBaseRequest();
-            switch(searchType)
-            {
-                case "All":
-                    request.SetPath("search/multi");
-                    break;
-                case "TV":
-                    request.SetPath("search/tv");
-                    break;
-                case "Movies":
-                    request.SetPath("search/movie");
-                    break;
-                case "People":
-                    request.SetPath("search/person");
-                    break;
-            }
+            request.SetPath(path);
             request.AddParameter("query", urlQuery);
             return await this.WebService.GetAsync<SearchResultPage>(request);
         }
