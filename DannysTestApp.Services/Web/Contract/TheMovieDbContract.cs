@@ -92,6 +92,7 @@ namespace DannysTestApp.Services.Web.Contract
                 this.Mapping.Add("OriginalTitle", "original_title");
                 this.Mapping.Add("Overview", "overview");
                 this.Mapping.Add("ReleaseDate", "release_date");
+                this.Mapping.Add("FirstAirDate", "first_air_date");
                 this.Mapping.Add("PosterPath", "poster_path");
                 this.Mapping.Add("Popularity", "popularity");
                 this.Mapping.Add("Title", "title");

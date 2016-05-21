@@ -11,6 +11,7 @@ namespace DannysTestApp.ViewModels
     public class SearchResultViewModel : ViewModelBase
     {
         private SearchResult _model;
+        private string _fullImagePath;
         private ImageSource _image;
 
         public SearchResult Model
@@ -22,6 +23,16 @@ namespace DannysTestApp.ViewModels
             set
             {
                 this._model = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public string FullImagePath
+        {
+            get { return this._fullImagePath; }
+            set
+            {
+                this._fullImagePath = value;
                 this.NotifyPropertyChanged();
             }
         }
@@ -40,10 +51,10 @@ namespace DannysTestApp.ViewModels
 
 
         }
+
         public SearchResultViewModel(SearchResult model)
         {
             this.Model = model;
         }
-
     }
 }

@@ -15,7 +15,8 @@ namespace DannysTestApp.Model
         public string OriginalLanguage { get; set; }
         public string OriginalTitle { get; set; }
         public string Overview { get; set; }
-        public DateTime? ReleaseDate { get; set; }
+        public string ReleaseDate { get; set; }
+        public string FirstAirDate { get; set; }
         public string PosterPath { get; set; }
         public double Popularity { get; set; }
         public string Title { get; set; }

@@ -62,15 +62,10 @@ namespace DannysTestApp.Services
             return escapedString.ToString();
         }
 
-        public Task<ImageSource> Getimage(string imagePath)
+        public string GetFullImagePath(string imagePath)
         {
-            return Task.Run(() =>
-            {
-                var baseUrl = "https://image.tmdb.org/t/p/w185";
-                var fullUrl = string.Format("{0}{1}", baseUrl, imagePath);
-                return new BitmapImage(new Uri(fullUrl)) as ImageSource;
-            });
-            
+            var baseUrl = "https://image.tmdb.org/t/p/w780";
+            return string.Format("{0}{1}", baseUrl, imagePath);
         }
     }
 }

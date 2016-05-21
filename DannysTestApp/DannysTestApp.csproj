@@ -137,6 +137,7 @@
     <None Include="DannysTestApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\no-image.png" />
     <Content Include="Assets\TheDivision.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

@@ -174,27 +174,23 @@ namespace DannysTestApp.ViewModels
             var resultsPage = await this.SearchService.SearchMultiAsync(this.SearchText, this.SelectedSearchType.ApiUrlPath);
             if(resultsPage != null)
             {
-                var vms = resultsPage.Results.Select( r => new SearchResultViewModel(r) );
+                var vms = resultsPage.Results.Select( r => this.ConvertToViewModel(r) );
                 this.SearchResults.AddRange(vms);
-                this.Loadimages(); 
             }
 
             this.IsSearching = false;
         }
+
         private void SetDefaults()
         {
             this.SelectedSearchType = this.SearchTypes.ElementAt(0);
         }
 
-        private async void Loadimages()
+        private SearchResultViewModel ConvertToViewModel(SearchResult result)
         {
-            foreach (var vm in this.SearchResults)
-            {
-                if (vm.Image != null)
-                    continue;
-
-                vm.Image = await this.SearchService.Getimage(vm.Model.BackdropPath);
-            }
+            var srViewModel = new SearchResultViewModel(result);
+            srViewModel.FullImagePath = this.SearchService.GetFullImagePath(result.BackdropPath);
+            return srViewModel;
         }
     }
 }
