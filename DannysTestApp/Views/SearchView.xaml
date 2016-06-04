@@ -21,7 +21,7 @@
         </DataTemplate>
         <DataTemplate x:Key="TVTemplate">
             <Grid Width="320" Height="200">
-                <Image Source="/Assets/no-image.png" Stretch="Fill"/>
+                <Image Source="{Binding FullImagePath}" Stretch="Fill"/>
                 <Grid VerticalAlignment="Bottom" Background="#AA000000">
                     <StackPanel Margin="10">
                         <TextBlock Text="{Binding Model.Name}" Style="{StaticResource TitleTextBlockStyle}" MaxLines="1"/>
@@ -61,7 +61,9 @@
             </Grid>
             <Grid Grid.Column="1">
                 <GridView ItemTemplateSelector="{StaticResource SearchViewTemplateSelector}" 
-                          ItemsSource="{Binding SearchResults}"/>
+                          ItemsSource="{Binding SearchResults}"
+                          SelectedItem="{Binding SelectedResult, Mode=TwoWay}"/>
+                
             </Grid>
         </Grid>
         <!-- Loading UI -->

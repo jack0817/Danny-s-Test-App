@@ -24,6 +24,8 @@ namespace DannysTestApp.ViewModels
 
     public class SearchViewModel : ViewModelBase
     {
+        public event EventHandler<SearchResultViewModel> ResultSelected;
+
         private string _searchText;
         private string _outputText;
         private ButtonCommand _searchCommand;
@@ -32,6 +34,7 @@ namespace DannysTestApp.ViewModels
         private ObservableCollection<SearchResultViewModel> _searchResults = new ObservableCollection<SearchResultViewModel>();
         private ObservableCollection<SearchType> _searchTypes = new ObservableCollection<SearchType>();
         private SearchType _selectedSearchType;
+        private SearchResultViewModel _selectedResult;
 
 
         
@@ -101,7 +104,18 @@ namespace DannysTestApp.ViewModels
 
             }
         }
-        
+
+        public SearchResultViewModel SelectedResult
+        {
+            get { return this._selectedResult; }
+            set
+            {
+                this._selectedResult = value;
+                this.NotifyPropertyChanged();
+                this.NavigateToDetail();
+            }
+        }
+
         public SearchView ParentView { get; set; }
 
         private SearchService SearchService { get; set; }
@@ -191,6 +205,15 @@ namespace DannysTestApp.ViewModels
             var srViewModel = new SearchResultViewModel(result);
             srViewModel.FullImagePath = this.SearchService.GetFullImagePath(result.BackdropPath);
             return srViewModel;
+        }
+
+        private void NavigateToDetail()
+        {
+            if (this.SelectedResult == null)
+            {
+                return;
+            }
+            this.ResultSelected(this, this.SelectedResult);
         }
     }
 }

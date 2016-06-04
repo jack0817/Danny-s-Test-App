@@ -37,20 +37,20 @@ namespace DannysTestApp.ViewModels
             }
         }
 
-        public ImageSource Image
-        {
-            get
-            {
-                return this._image;
-            }
-            set
-            {
-                this._image = value;
-                this.NotifyPropertyChanged();
-            }
+        //public ImageSource Image
+        //{
+        //    get
+        //    {
+        //        return this._image;
+        //    }
+        //    set
+        //    {
+        //        this._image = value;
+        //        this.NotifyPropertyChanged();
+        //    }
 
 
-        }
+        //}
 
         public SearchResultViewModel(SearchResult model)
         {

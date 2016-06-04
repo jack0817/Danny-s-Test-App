@@ -69,10 +69,16 @@ namespace DannysTestApp.Views
         {
             this.InitializeComponent();
             this.DataContext = this.ViewModel;
+            this.ViewModel.ResultSelected += this.ViewModel_ResultSelected;
             this.ViewModel.ParentView = this;
             this.searchViewTemplateSelector.ParentView = this;
         }
-            
+
+        private void ViewModel_ResultSelected(object sender, SearchResultViewModel selectedResult)
+        {
+            this.Frame.Navigate(typeof(ResultDetailPage), selectedResult);
+        }
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             var settingsService = new AppSettingsService();
