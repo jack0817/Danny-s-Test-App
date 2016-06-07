@@ -102,6 +102,7 @@ namespace DannysTestApp.Services.Web.Contract
                 this.Mapping.Add("MediaType", "media_type");
                 this.Mapping.Add("Genres", "genre_ids");
                 this.Mapping.Add("Name", "name");
+                this.Mapping.Add("ProfilePath", "profile_path");
                 return;
             }
         }

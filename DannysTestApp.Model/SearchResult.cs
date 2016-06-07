@@ -25,6 +25,7 @@ namespace DannysTestApp.Model
         public int VoteCount { get; set; }
         public string MediaType { get; set; }
         public string Name { get; set; }
+        public string ProfilePath { get; set; }
         
         [Ignore]
         public List<int> Genres { get; set; }
