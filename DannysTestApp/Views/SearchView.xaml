@@ -16,7 +16,7 @@
         <converteres:TitleFromSearchResultConverter x:Key="TitleFromSearchResultConverter"/>
         <DataTemplate x:Key="MovieTemplate">
             <Grid Width="320" Height="200">
-                <Image Source="{Binding FullImagePath}" Stretch="Fill"/>
+                <Image Source="{Binding FullImagePath}" Stretch="UniformToFill"/>
                 <Grid VerticalAlignment="Bottom" Background="#AA000000">
                     <StackPanel Margin="10">
                         <TextBlock Text="{Binding Model.Title}" Style="{StaticResource TitleTextBlockStyle}" MaxLines="1"/>
@@ -39,7 +39,7 @@
         </DataTemplate>
         <DataTemplate x:Key="PersonTemplate">
             <Grid Width="320" Height="200">
-                <Image Source="{Binding FullImagePath}" Stretch="Fill"/>
+                <Image Source="{Binding FullImagePath}" Stretch="UniformToFill"/>
                 <Grid VerticalAlignment="Bottom" Background="#AA000000">
                     <StackPanel Margin="10">
                         <TextBlock Text="{Binding Model.Name}" Style="{StaticResource TitleTextBlockStyle}" MaxLines="1"/>

@@ -203,10 +203,23 @@ namespace DannysTestApp.ViewModels
         private SearchResultViewModel ConvertToViewModel(SearchResult result)
         {
             var srViewModel = new SearchResultViewModel(result);
-            srViewModel.FullImagePath = this.SearchService.GetFullImagePath(result.BackdropPath);
+            switch (srViewModel.MediaType)
+            {
+                case SearchMediaType.TV:
+                    srViewModel.FullImagePath = this.SearchService.GetFullImagePath(result.BackdropPath);
+                    break;
+                case SearchMediaType.Movies:
+                    srViewModel.FullImagePath = this.SearchService.GetFullImagePath(result.PosterPath);
+                    break;
+                case SearchMediaType.Person:
+                    srViewModel.FullImagePath = this.SearchService.GetFullImagePath(result.ProfilePath);
+                    break;
+            }
+            srViewModel.UserSelectedMediaType = this.SelectedSearchType.ApiMediaType;
             return srViewModel;
         }
 
+       
         private void NavigateToDetail()
         {
             if (this.SelectedResult == null)

@@ -8,13 +8,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace DannysTestApp.Services
 {
-    public enum SearchMediaType
-    {
-        All,
-        Movies,
-        TV,
-        Person,
-    }
+    
 
     internal class SearchResults
     {

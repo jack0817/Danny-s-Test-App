@@ -36,14 +36,13 @@ namespace DannysTestApp.Views
             }
             else
             {
-                var mediaType = searchResult.Model.MediaType ?? this.ParentView.UserSearchType.ApiMediaType;
-                switch (mediaType)
+                switch (searchResult.MediaType)
                 {
-                    case "tv":
+                    case SearchMediaType.TV:
                         return this.TVTemplate;
-                    case "movie":
+                    case SearchMediaType.Movies:
                         return this.MovieTemplate;
-                    case "person":
+                    case SearchMediaType.Person:
                         return this.PersonTemplate;
                     default:
                         return null;                 
