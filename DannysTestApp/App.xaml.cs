@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 namespace DannysTestApp
 {
     /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
+    /// Provides application-specific behavior to supplement the default Application class. Testing Slack Integration 
     /// </summary>
     sealed partial class App : Application
     {
